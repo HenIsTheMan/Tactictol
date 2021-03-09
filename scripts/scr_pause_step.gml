@@ -1,3 +1,10 @@
+if(!tile_exists(gridSquare)){
+    gridSquare = tile_add(tileSet_gridSquares,32 * (layerDepth - 1000000),0,32,32,32,128,999999);
+}
+for(i = 1000000; i < 1000007; i++){
+    tile_layer_hide(i);
+}
+
 if(keyboard_check_pressed(vk_shift)){
     room_restart();
 }
@@ -24,6 +31,16 @@ if(keyboard_check_pressed(ord("V"))){
     }
 }
 
+if(keyboard_check_pressed(ord("G"))){
+    tile_delete(gridSquare);
+    if(layerDepth < 1000006){
+        layerDepth++;
+    } else{
+        layerDepth = 1000000;
+    }
+    gridSquare = tile_add(tileSet_gridSquares,32 * (layerDepth - 1000000),0,32,32,32,128,999999);
+}
+
 if(keyboard_check_pressed(ord("N"))){
     side++;
     if(side & 1){
@@ -38,8 +55,8 @@ if(keyboard_check_pressed(ord("N"))){
         key[5] = virtual_key_add(128,0,32,32,vk_space);
         key[6] = virtual_key_add(64,256,32,32,ord("C")); 
         key[7] = virtual_key_add(64,0,32,32,ord("V"));
-        key[8] = virtual_key_add(64,224,32,32,ord("T"));
-        key[9] = virtual_key_add(64,32,32,32,ord("Y"));
+        key[8] = virtual_key_add(0,256,32,32,ord("T"));
+        key[9] = virtual_key_add(128,0,32,32,ord("Y"));
     } else{
         for(i = 0; i < 10; i++){
             virtual_key_delete(key[i]);

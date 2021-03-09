@@ -15,5 +15,5 @@
   <For3D>0</For3D>
   <width>224</width>
   <height>32</height>
-  <data>images\tile_gridSquare.png</data>
+  <data>images\tileSet_gridSquares.png</data>
 </background>

@@ -18,7 +18,7 @@
     <sprite>sprites\spr_timer</sprite>
   </sprites>
   <backgrounds name="background">
-    <background>background\tile_gridSquare</background>
+    <background>background\tileSet_gridSquares</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
