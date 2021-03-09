@@ -1,3 +1,21 @@
+if(keyboard_check_pressed(ord("N"))){
+    sameSymbol = 0;
+    sameColour = 0;
+    blind = 0;
+    scr_symbols();
+    scr_colours();
+}
+
+if(keyboard_check_pressed(ord("X"))){
+    sameSymbol++;
+    scr_symbols();     
+}
+
+if(keyboard_check_pressed(ord("C"))){
+    sameColour++;
+    scr_colours();
+}
+
 if(keyboard_check_pressed(ord("B"))){
     blind++;
 }
@@ -10,24 +28,7 @@ if(keyboard_check_pressed(vk_shift)){
     }
 }
 
-if(keyboard_check_pressed(ord("C"))){
-    if(subimg1 < sprite_get_number(spr_symbols) - 1){
-        subimg1++;
-    } else{
-        subimg1 = 2 * (side & 1);
-    }
-    colour1 = choose(c_red, c_orange, c_yellow, c_lime, c_blue, c_fuchsia);
-}
-if(keyboard_check_pressed(ord("V"))){
-    if(subimg2 < sprite_get_number(spr_symbols) - 1){
-        subimg2++;
-    } else{
-        subimg2 = 2 * (side & 1);
-    }
-    colour2 = choose(c_red, c_orange, c_yellow, c_lime, c_blue, c_fuchsia);
-}
-
-if(keyboard_check_pressed(ord("N"))){
+if(keyboard_check_pressed(ord("S"))){
     side++;
     if(side & 1){
         while(subimg1 < 2){
