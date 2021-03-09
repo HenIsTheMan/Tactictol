@@ -67,7 +67,7 @@
     <option_android_set_device_id></option_android_set_device_id>
     <option_android_sleep_margin>4</option_android_sleep_margin>
     <option_android_splash_png>Configs\Default\android\splash.png</option_android_splash_png>
-    <option_android_splash_time>0</option_android_splash_time>
+    <option_android_splash_time>2</option_android_splash_time>
     <option_android_support_lib_version>23.1.1</option_android_support_lib_version>
     <option_android_target_sdk_version>23</option_android_target_sdk_version>
     <option_android_texture_page>1024</option_android_texture_page>

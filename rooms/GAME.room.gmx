@@ -10,7 +10,10 @@
   <persistent>0</persistent>
   <colour>0</colour>
   <showcolour>-1</showcolour>
-  <code>instance_create(x,y,obj_cursor);</code>
+  <code>display_set_gui_size(room_width,room_height);
+instance_create(x,y,obj_cursor);
+device_mouse_dbclick_enable(0);
+randomize();</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
