@@ -106,7 +106,7 @@ scr_vKeysAdd();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(time1 != 0 &amp;&amp; time2 != 0 &amp;&amp; !pause){ //script??
+            <string>if(time1 != 0 &amp;&amp; time2 != 0 &amp;&amp; !pause){
     if(turn &amp; 1){
         time2--;
     } else{

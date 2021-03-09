@@ -4,8 +4,9 @@ if(side & 1){
     if(subimg == 0){
         draw_sprite(spr_buttons,2,64,0);
         draw_sprite(spr_buttons,turn % 2,128*(turn & 1),256*(~turn & 1));
-        draw_sprite(spr_timer,3-time1 + 4*(timer1 & 1),128,256);
-        draw_sprite_ext(spr_timer,3-time2 + 4*(timer2 & 1),32,32,1,1,180,-1,1);
+        draw_sprite(spr_timer,5 - time1,64,224);
+        draw_sprite_ext(spr_timer,5 - time2,96,64,1,1,180,-1,1);
+        draw_sprite(spr_buttons,16 + (turn & 1),128 * (~turn & 1),256 * (~turn & 1));
     } else{
         draw_sprite(spr_buttons,5,64,256);
         draw_sprite(spr_buttons,6,64,0);
@@ -13,8 +14,9 @@ if(side & 1){
 } else{
     if(subimg == 0){
         draw_sprite(spr_buttons,0,128*(turn & 1),256);
-        draw_sprite(spr_timer,3-time1 + 4*(timer1 & 1),0,0);
-        draw_sprite(spr_timer,3-time2 + 4*(timer2 & 1),128,0);
+        draw_sprite(spr_timer,5 - time1,16,16);
+        draw_sprite(spr_timer,5 - time2,112,16);
+        draw_sprite(spr_buttons,16,64,224);
     } else{
         draw_sprite(spr_buttons,5,64,256);
     }
@@ -29,7 +31,7 @@ if(subimg2 > 10){
 
 for(c = 0;c < ds_grid_width(grid);c++){
     for(r = 0;r < ds_grid_height(grid);r++){
-        if(~blind & 1){  
+        if(~blind & 1 || subimg > 0){  
             switch(grid[# c,r]){
                 case 0: draw_sprite_ext(spr_symbols,subimg1,c*32,r*32+64,0.2,0.2,0,colour1,1); break;
                 case 1: draw_sprite_ext(spr_symbols,subimg2,c*32,r*32+64,0.2,0.2,0,colour2,1); break;
@@ -44,7 +46,7 @@ for(c = 0;c < ds_grid_width(grid);c++){
                 }
             }
         }
-        if(gridCheck[# c,r] == 1 && subimg < image_number){
+        if((~blind & 1 || subimg > 0) && gridCheck[# c,r] == 1 && subimg < image_number){
             draw_sprite(sprite_index,subimg,c*32,r*32+64);
         }
     }
