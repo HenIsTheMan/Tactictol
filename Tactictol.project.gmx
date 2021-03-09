@@ -6,8 +6,7 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\spr_circle</sprite>
-    <sprite>sprites\spr_cross</sprite>
+    <sprite>sprites\spr_symbols</sprite>
     <sprite>sprites\spr_resetButton</sprite>
     <sprite>sprites\spr_check</sprite>
   </sprites>
@@ -16,10 +15,7 @@
   </backgrounds>
   <paths name="paths"/>
   <objects name="objects">
-    <object>objects\obj_circle</object>
-    <object>objects\obj_cross</object>
     <object>objects\obj_resetButton</object>
-    <object>objects\obj_check</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\ROOM</room>
