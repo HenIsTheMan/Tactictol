@@ -35,12 +35,15 @@ time1 = 3;
 time2 = 3;
 placed = 0;
 subimg = 0;
+subimg1 = 0;
+subimg2 = 1;
 pause = 0;
-key = virtual_key_add(0,256,32,32,vk_space);
 virtual_key_add(0,0,32,32,ord("P")); 
 virtual_key_add(128,256,32,32,ord("P"));
-virtual_key_add(128,0,32,32,ord("R")); 
-virtual_key_add(0,256,32,32,ord("R"));
+virtual_key_add(128,0,32,32,vk_space); 
+virtual_key_add(0,256,32,32,vk_space);
+virtual_key_add(64,256,32,32,ord("C")); 
+virtual_key_add(64,0,32,32,ord("V")); 
 </string>
           </argument>
         </arguments>
@@ -93,7 +96,7 @@ alarm[0] = 1000000/delta_time;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(keyboard_check_pressed(ord("P"))){
+            <string>if(keyboard_check_pressed(ord("P")) &amp;&amp; subimg1 != subimg2){
     switch(pause){
         case 0: pause = 1; break;
         case 1: pause = 0; break;

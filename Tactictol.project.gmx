@@ -5,9 +5,10 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound">
+    <sound>sound\snd_normalWin</sound>
+    <sound>sound\snd_blockWin</sound>
     <sound>sound\snd_beep</sound>
     <sound>sound\snd_lose</sound>
-    <sound>sound\snd_win</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_symbols</sprite>

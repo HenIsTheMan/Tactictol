@@ -6,8 +6,9 @@ draw_sprite(spr_countdown,3-time1,64,256);
 
 for(c = 0;c < ds_grid_width(grid);c++){
     for(r = 0;r < ds_grid_height(grid);r++){
-        if(grid[# c,r] != -5){
-            draw_sprite(spr_symbols,grid[# c,r],c*32,r*32+64);
+        switch(grid[# c,r]){
+            case 0: draw_sprite(spr_symbols,subimg1,c*32,r*32+64); break;
+            case 1: draw_sprite(spr_symbols,subimg2,c*32,r*32+64); break;
         }
         if(gridCheck[# c,r] == 1){
             draw_sprite(sprite_index,subimg,c*32,r*32+64);
