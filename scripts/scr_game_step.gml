@@ -1,7 +1,7 @@
 x = device_mouse_x(0) div 32 * 32;
 y = device_mouse_y(0) div 32 * 32;
 
-if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),0,64,160,64+160)){
+if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),0,64,160,64+159)){
     if(grid[# x/32,y/32 - 2] == -5 && (placed == 0 || block)){
         if(placed == 0){
             for(i = 0; i < 25; i++){
@@ -40,11 +40,10 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
             ds_grid_clear(gridCheck,0);
             gridCheck[# x/32,y/32 - 2] = 1;
             subimg = 2;
-            blind = 0;
         } else{
             audio_play_sound(snd_beep,0,0);
         }
-    } else if(subimg == 0 && grid[# x/32,y/32 - 2] != -5 && gridCheck[# x/32,y/32 - 2] == 0){
+    } else if(grid[# x/32,y/32 - 2] != -5 && gridCheck[# x/32,y/32 - 2] == 0){
         if(ds_grid_get_sum(gridCheck,0,0,4,4) == 3){
             ds_grid_clear(gridCheck,0);
         }
@@ -62,7 +61,6 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
                         audio_play_sound(snd_normalWin,0,0);
                     }
                     subimg = 1;
-                    blind = 0;
                 }
             }
         }
@@ -76,14 +74,32 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
                             audio_play_sound(snd_normalWin,0,0);
                         }
                         subimg = 1;
-                        blind = 0;
                     }
                 }
             }
         }
-    } else if(subimg == 0){
+    } else{
         gridCheck[# x/32,y/32 - 2] = 0;
     }
+}
+
+if(keyboard_check_pressed(ord("U")) && placed > 0 && time1 != 0 && time2 != 0 && (~side & 1 || (side & 1 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),128*(~turn & 1),256*(~turn & 1),128*(~turn & 1)+32,256*(~turn & 1)+32)))){
+    placed--;
+    turnPlaced = placed;
+    grid[# cShow[placed],rShow[placed]] = -5;
+    cShow[placed] = 10;
+    cShow[placed] = 10;
+}
+
+if(alarm[0] == -1){
+    if(keyboard_check_pressed(vk_up) && timeLimit < 5){
+        timeLimit++;
+    }
+    if(keyboard_check_pressed(vk_down) && timeLimit > 1){
+        timeLimit--;
+    }
+    time1 = timeLimit;
+    time2 = timeLimit;
 }
 
 if(keyboard_check_pressed(vk_space)){
@@ -91,22 +107,14 @@ if(keyboard_check_pressed(vk_space)){
         audio_play_sound(snd_end,0,0);
         block = 0;
         placed = 0;
-        subimg = 0;
         ds_grid_clear(gridCheck,0);
         turn++;
-        if(ds_grid_get_max(grid,0,0,4,4) != -5){
+        if(alarm[0] != -1){
             time1 = timeLimit;
             time2 = timeLimit;
             alarm[0] = 1000000/delta_time;
         }
     }
-}
-
-if(keyboard_check_pressed(ord("T"))){
-    timer1++;
-}
-if(keyboard_check_pressed(ord("Y"))){
-    timer2++;
 }
 
 //sudden death
@@ -115,6 +123,7 @@ if(ds_grid_get_min(grid,0,0,4,4) == 0 && (time1 == 0 || time2 == 0)){
         timeLimit--;
         scr_restart();
     } else{
+        ds_grid_clear(gridCheck,0);
         subimg = 3;
     }
 }

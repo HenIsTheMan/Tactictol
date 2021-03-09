@@ -9,7 +9,7 @@ if(sameColour & 1){
     while(subimg1 > 10){
         subimg1 = irandom_range(2*(side & 1),sprite_get_number(spr_symbols) - 1);
     }
-    while(subimg2 > 10 || subimg2 == subimg1){
+    while(subimg2 > 10 || (~sameSymbol & 1 && subimg2 == subimg1)){
         subimg2 = irandom_range(2*(side & 1),sprite_get_number(spr_symbols) - 1);
     }
 } else{
