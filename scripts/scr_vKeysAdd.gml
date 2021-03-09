@@ -18,5 +18,6 @@ if(side & 1){
     key[4] = virtual_key_add(32,224,32,32,vk_down);
     key[5] = virtual_key_add(128,224,32,32,vk_up);
     key[6] = virtual_key_add(96,224,32,32,vk_down);
-    key[7] = virtual_key_add(64,224,32,32,ord("U"));
+    key[7] = virtual_key_add(32,256,32,32,ord("U"));
+    key[8] = virtual_key_add(96,256,32,32,ord("U"));
 }

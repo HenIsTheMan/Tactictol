@@ -1,8 +1,8 @@
 ds_grid_clear(grid,-5);
 ds_grid_clear(gridCheck,0);
 turn = choose(0,1);
-time1 = timeLimit;
-time2 = timeLimit;
+time1 = timeLimit1;
+time2 = timeLimit2;
 alarm[0] = -1;
 placed = 0;
 turnPlaced = 0;

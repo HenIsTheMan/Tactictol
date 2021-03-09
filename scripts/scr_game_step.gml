@@ -32,8 +32,8 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
                 }
             }
         }
-        time1 = timeLimit;
-        time2 = timeLimit;
+        time1 = timeLimit1;
+        time2 = timeLimit2;
         alarm[0] = 1000000/delta_time;
         if(placed > 1 && !block){
             audio_play_sound(snd_lose,0,0);
@@ -83,7 +83,7 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
     }
 }
 
-if(keyboard_check_pressed(ord("U")) && placed > 0 && time1 != 0 && time2 != 0 && (~side & 1 || (side & 1 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),128*(~turn & 1),256*(~turn & 1),128*(~turn & 1)+32,256*(~turn & 1)+32)))){
+if(keyboard_check_pressed(ord("U")) && placed > 0 && time1 != 0 && time2 != 0 && ((~side & 1 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),32 + 64 * (turn & 1),256,32 + 64 * (turn & 1) + 32,288)) || (side & 1 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),128*(~turn & 1),256*(~turn & 1),128*(~turn & 1)+32,256*(~turn & 1)+32)))){
     placed--;
     turnPlaced = placed;
     grid[# cShow[placed],rShow[placed]] = -5;
@@ -92,14 +92,24 @@ if(keyboard_check_pressed(ord("U")) && placed > 0 && time1 != 0 && time2 != 0 &&
 }
 
 if(alarm[0] == -1){
-    if(keyboard_check_pressed(vk_up) && timeLimit < 5){
-        timeLimit++;
+    if(keyboard_check_pressed(vk_up)){
+        if(timeLimit1 < 5 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),0,0,80,288)){
+            timeLimit1++;
+        }
+        if(timeLimit2 < 5 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),80,0,160,288)){
+            timeLimit2++;
+        }
     }
-    if(keyboard_check_pressed(vk_down) && timeLimit > 1){
-        timeLimit--;
+    if(keyboard_check_pressed(vk_down)){
+        if(timeLimit1 > 1 && ((side & 1 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),96,256,128,288)) || (~side & 1 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),32,224,64,256)))){
+            timeLimit1--;
+        }
+        if(timeLimit2 > 1 && ((side & 1 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),32,0,64,32)) || (~side & 1 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),96,224,128,256)))){
+            timeLimit2--;
+        }
     }
-    time1 = timeLimit;
-    time2 = timeLimit;
+    time1 = timeLimit1;
+    time2 = timeLimit2;
 }
 
 if(keyboard_check_pressed(vk_space)){
@@ -110,8 +120,8 @@ if(keyboard_check_pressed(vk_space)){
         ds_grid_clear(gridCheck,0);
         turn++;
         if(alarm[0] != -1){
-            time1 = timeLimit;
-            time2 = timeLimit;
+            time1 = timeLimit1;
+            time2 = timeLimit2;
             alarm[0] = 1000000/delta_time;
         }
     }
@@ -119,8 +129,9 @@ if(keyboard_check_pressed(vk_space)){
 
 //sudden death
 if(ds_grid_get_min(grid,0,0,4,4) == 0 && (time1 == 0 || time2 == 0)){
-    if(timeLimit > 1){
-        timeLimit--;
+    if(timeLimit1 + timeLimit2 > 2){
+        timeLimit1--;
+        timeLimit2--;
         scr_restart();
     } else{
         ds_grid_clear(gridCheck,0);

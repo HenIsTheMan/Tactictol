@@ -2,21 +2,37 @@ draw_sprite(spr_buttons,2,64,256);
 
 if(side & 1){
     if(subimg == 0){
+        draw_sprite(spr_buttons,turn % 2,128 * (turn & 1),256 * (~turn & 1));
+        draw_sprite_ext(spr_buttons,~turn & 1,128 * (~turn & 1),256 * (turn & 1),1,1,0,-1,0.3);
         draw_sprite(spr_buttons,2,64,0);
-        draw_sprite(spr_buttons,turn % 2,128*(turn & 1),256*(~turn & 1));
         draw_sprite(spr_timer,5 - time1,64,224);
         draw_sprite_ext(spr_timer,5 - time2,96,64,1,1,180,-1,1);
-        draw_sprite(spr_buttons,16 + (turn & 1),128 * (~turn & 1),256 * (~turn & 1));
+        draw_sprite_ext(spr_buttons,16 + (turn & 1),128 * (~turn & 1),256 * (~turn & 1),1,1,0,-1,1 - 0.7 * (!sign(placed) || time1 = 0 || time2 = 0));
+        draw_sprite_ext(spr_buttons,16 + (~turn & 1),128 * (turn & 1),256 * (turn & 1),1,1,0,-1,0.3);
+        if(alarm[0] == -1){
+            draw_sprite_ext(spr_buttons,18,32,256,1,1,0,-1,1 - 0.7 * !abs(sign(timeLimit1 - 5)));
+            draw_sprite_ext(spr_buttons,19,96,256,1,1,0,-1,1 - 0.7 * !sign(timeLimit1 - 1));
+            draw_sprite_ext(spr_buttons,18,96,0,1,1,0,-1,1 - 0.7 * !abs(sign(timeLimit2 - 5)));
+            draw_sprite_ext(spr_buttons,19,32,0,1,1,0,-1,1 - 0.7 * !sign(timeLimit2 - 1));
+        }
     } else{
         draw_sprite(spr_buttons,5,64,256);
         draw_sprite(spr_buttons,6,64,0);
     }
 } else{
     if(subimg == 0){
-        draw_sprite(spr_buttons,0,128*(turn & 1),256);
+        draw_sprite(spr_buttons,0,128 * (turn & 1),256);
+        draw_sprite_ext(spr_buttons,0,128 * (~turn & 1),256,1,1,0,-1,0.3);
         draw_sprite(spr_timer,5 - time1,16,16);
         draw_sprite(spr_timer,5 - time2,112,16);
-        draw_sprite(spr_buttons,16,64,224);
+        draw_sprite_ext(spr_buttons,16,32 + 64 * (turn & 1),256,1,1,0,-1,1 - 0.7 * (!sign(placed) || time1 = 0 || time2 = 0));
+        draw_sprite_ext(spr_buttons,16,32 + 64 * (~turn & 1),256,1,1,0,-1,0.3);
+        if(alarm[0] == -1){
+            draw_sprite_ext(spr_buttons,18,0,224,1,1,0,-1,1 - 0.7 * !abs(sign(timeLimit1 - 5)));
+            draw_sprite_ext(spr_buttons,19,32,224,1,1,0,-1,1 - 0.7 * !sign(timeLimit1 - 1));
+            draw_sprite_ext(spr_buttons,18,128,224,1,1,0,-1,1 - 0.7 * !abs(sign(timeLimit2 - 5)));
+            draw_sprite_ext(spr_buttons,19,96,224,1,1,0,-1,1 - 0.7 * !sign(timeLimit2 - 1));
+        }
     } else{
         draw_sprite(spr_buttons,5,64,256);
     }
