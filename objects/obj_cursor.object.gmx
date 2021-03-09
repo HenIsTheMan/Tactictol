@@ -30,25 +30,26 @@ gridCheck = ds_grid_create(5,5); //??
 ds_grid_clear(grid,-5);
 ds_grid_clear(gridCheck,0);
 turn = choose(0,1);
+side = choose(0,1);
 block = 0;
+timeLimit = 3;
 time1 = 3;
 time2 = 3;
 placed = 0;
+turnPlaced = 0;
 subimg = 0;
-subimg1 = irandom(sprite_get_number(spr_symbols) - 1);
+subimg1 = irandom_range(2*(side &amp; 1),sprite_get_number(spr_symbols) - 1);
 subimg2 = subimg1;
 while(subimg2 == subimg1){
-    subimg2 = irandom(sprite_get_number(spr_symbols) - 1);
+    subimg2 = irandom_range(2*(side &amp; 1),sprite_get_number(spr_symbols) - 1);
 }
 colour1 = choose(c_red, c_orange, c_yellow, c_lime, c_blue, c_fuchsia);
 colour2 = choose(c_red, c_orange, c_yellow, c_lime, c_blue, c_fuchsia);
 pause = 0;
-side = choose(0,1);
 timer1 = 0;
 timer2 = 0;
 sidePressed = 0;
 blind = 0;
-turnPlaced = 0;
 for(i = 0; i &lt; 25; i++){
     cShow[i] = 10;
     rShow[i] = 10;
@@ -124,6 +125,7 @@ alarm[0] = 1000000/delta_time;
         }
     } else{
         audio_play_sound(snd_restart,0,0);
+        timeLimit = 3;
         scr_restart();
     }
     sidePressed = point_in_rectangle(device_mouse_x(0),device_mouse_y(0),64,0,64+32,32);
