@@ -4,7 +4,9 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_gameOver</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_symbols</sprite>
     <sprite>sprites\spr_reset</sprite>
@@ -17,6 +19,7 @@
   <paths name="paths"/>
   <objects name="objects">
     <object>objects\obj_reset</object>
+    <object>objects\obj_cursor</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\GAME</room>
