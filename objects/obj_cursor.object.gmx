@@ -32,7 +32,8 @@ ds_grid_clear(gridCheck,0);
 turn = choose(0,1);
 side = 0;
 block = 0;
-timeLimit = 3;
+timeLimit1 = 3;
+timeLimit2 = 3;
 time1 = 3;
 time2 = 3;
 placed = 0;
@@ -144,7 +145,8 @@ alarm[0] = 1000000/delta_time;
         }
     } else{
         audio_play_sound(snd_restart,0,0);
-        timeLimit = 3;
+        timeLimit1 = 3;
+        timeLimit2 = 3;
         scr_restart();
     }
     sidePressed = point_in_rectangle(device_mouse_x(0),device_mouse_y(0),64,0,64+32,32);

@@ -1,5 +1,5 @@
 if(side & 1){
-    for(i = 0; i < 8; i++){
+    for(i = 0; i < 9; i++){
         virtual_key_delete(key[i]);
     }
 } else{
