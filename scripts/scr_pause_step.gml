@@ -18,6 +18,7 @@ if(keyboard_check_pressed(ord("C"))){
 
 if(keyboard_check_pressed(ord("B"))){
     blind++;
+    blind -= 3 * (blind == 3);
 }
 
 if(keyboard_check_pressed(vk_shift)){

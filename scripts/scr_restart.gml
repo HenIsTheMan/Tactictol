@@ -4,6 +4,7 @@ turn = choose(0,1);
 time1 = timeLimit1;
 time2 = timeLimit2;
 alarm[0] = -1;
+lose = 0;
 placed = 0;
 turnPlaced = 0;
 subimg = 0;
@@ -12,6 +13,8 @@ scr_colours();
 for(i = 0; i < 25; i++){
     cShow[i] = 10;
     rShow[i] = 10;
+    cc[i] = 10;
+    rr[i] = 10;
 }
 pause = 0;
 tile_layer_show(layerDepth);
