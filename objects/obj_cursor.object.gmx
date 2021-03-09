@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>grid = ds_grid_create(5,5);
-gridCheck = ds_grid_create(5,5); //??
+gridCheck = ds_grid_create(5,5);
 ds_grid_clear(grid,-5);
 ds_grid_clear(gridCheck,0);
 turn = choose(0,1);
@@ -36,6 +36,7 @@ timeLimit1 = 3;
 timeLimit2 = 3;
 time1 = 3;
 time2 = 3;
+lose = 0;
 placed = 0;
 turnPlaced = 0;
 
@@ -76,6 +77,8 @@ blind = 0;
 for(i = 0; i &lt; 25; i++){
     cShow[i] = 10;
     rShow[i] = 10;
+    cc[i] = 10;
+    rr[i] = 10;
 }
 
 virtual_key_add(64,256,32,32,ord("P"));
@@ -141,7 +144,10 @@ alarm[0] = 1000000/delta_time;
     if(subimg == 0){
         switch(pause){
             case 0: pause = 1; tile_layer_hide(layerDepth); break;
-            case 1: pause = 0; tile_layer_show(layerDepth); break;
+            case 1: pause = 0;
+            if(blind &lt; 2){
+                tile_layer_show(layerDepth);
+            } break;
         }
     } else{
         audio_play_sound(snd_restart,0,0);

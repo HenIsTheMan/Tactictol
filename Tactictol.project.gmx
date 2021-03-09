@@ -31,6 +31,7 @@
     <script>scripts\scr_pause_step.gml</script>
     <script>scripts\scr_game_draw.gml</script>
     <script>scripts\scr_pause_draw.gml</script>
+    <script>scripts\scr_lose.gml</script>
     <script>scripts\scr_restart.gml</script>
   </scripts>
   <objects name="objects">
