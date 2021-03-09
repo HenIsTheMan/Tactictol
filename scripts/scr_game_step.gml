@@ -137,7 +137,7 @@ if(keyboard_check_pressed(vk_space)){
                     value1[m,n] = grid[# m,n];
                     value2[m,n] = gridCheck[# m,n];
                 }
-                /*if(m >= 5 && n >= 5){ //vert
+                if(m >= 5 && n >= 5){ //vert
                     grid[# m - 5,n - 5] = value1[4 - (m - 5),n - 5];
                     gridCheck[# m - 5,n - 5] = value2[4 - (m - 5),n - 5];
                 }
@@ -148,14 +148,22 @@ if(keyboard_check_pressed(vk_space)){
                 if(m >= 5 && n >= 5){ //1st diagonal
                     grid[# m - 5,n - 5] = value1[n - 5,m - 5];
                     gridCheck[# m - 5,n - 5] = value2[n - 5,m - 5];
-                }*/
+                }
                 if(m >= 5 && n >= 5){ //2nd diagonal
                     grid[# m - 5,n - 5] = value1[4 - (n - 5), 4 - (m - 5)];
                     gridCheck[# m - 5,n - 5] = value2[4 - (n - 5), 4 - (m - 5)];
                 }
+                if(m >= 5 && n >= 5){ //clockwise
+                    grid[# m - 5,n - 5] = value1[n - 5,4 - (m - 5)];
+                    gridCheck[# m - 5,n - 5] = value2[n - 5,4 - (m - 5)];
+                }
+                if(m >= 5 && n >= 5){ //anti-clockwise
+                    grid[# m - 5,n - 5] = value1[4 - (n - 5),m - 5];
+                    gridCheck[# m - 5,n - 5] = value2[4 - (n - 5),m - 5];
+                }
             }
         }
-        /*for(i = 0; i < turnPlaced; i++){ //vert
+        for(i = 0; i < turnPlaced; i++){ //vert
             cShow[i] = 4 - cShow[i];
         }
         for(i = 0; i < turnPlaced; i++){ //horizontal
@@ -165,10 +173,20 @@ if(keyboard_check_pressed(vk_space)){
             cStore[i] = cShow[i];
             cShow[i] = rShow[i];
             rShow[i] = cStore[i];
-        }*/
+        }
         for(i = 0; i < turnPlaced; i++){ //2nd diagonal
             cStore[i] = cShow[i];
             cShow[i] = 4 - rShow[i];
+            rShow[i] = 4 - cStore[i];
+        }
+        for(i = 0; i < turnPlaced; i++){ //clockwise
+            cStore[i] = cShow[i];
+            cShow[i] = 4 - rShow[i];
+            rShow[i] = cStore[i];
+        }
+        for(i = 0; i < turnPlaced; i++){ //anti-clockwise
+            cStore[i] = cShow[i];
+            cShow[i] = rShow[i];
             rShow[i] = 4 - cStore[i];
         }
     }
