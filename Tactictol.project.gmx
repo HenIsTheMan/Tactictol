@@ -18,7 +18,6 @@
   </backgrounds>
   <paths name="paths"/>
   <objects name="objects">
-    <object>objects\obj_reset</object>
     <object>objects\obj_cursor</object>
   </objects>
   <rooms name="rooms">
