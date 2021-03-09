@@ -137,7 +137,7 @@ if(keyboard_check_pressed(vk_space)){
                     value1[m,n] = grid[# m,n];
                     value2[m,n] = gridCheck[# m,n];
                 }
-                if(m >= 5 && n >= 5){ //vert
+                /*if(m >= 5 && n >= 5){ //vert
                     grid[# m - 5,n - 5] = value1[4 - (m - 5),n - 5];
                     gridCheck[# m - 5,n - 5] = value2[4 - (m - 5),n - 5];
                 }
@@ -153,17 +153,17 @@ if(keyboard_check_pressed(vk_space)){
                     grid[# m - 5,n - 5] = value1[4 - (n - 5), 4 - (m - 5)];
                     gridCheck[# m - 5,n - 5] = value2[4 - (n - 5), 4 - (m - 5)];
                 }
-                if(m >= 5 && n >= 5){ //clockwise
+                if(m >= 5 && n >= 5){ //clockwise (assign value anti-clockwise to it)
                     grid[# m - 5,n - 5] = value1[n - 5,4 - (m - 5)];
                     gridCheck[# m - 5,n - 5] = value2[n - 5,4 - (m - 5)];
-                }
-                if(m >= 5 && n >= 5){ //anti-clockwise
+                }*/
+                if(m >= 5 && n >= 5){ //anti-clockwise (...)
                     grid[# m - 5,n - 5] = value1[4 - (n - 5),m - 5];
                     gridCheck[# m - 5,n - 5] = value2[4 - (n - 5),m - 5];
                 }
             }
         }
-        for(i = 0; i < turnPlaced; i++){ //vert
+        /*for(i = 0; i < turnPlaced; i++){ //vert
             cShow[i] = 4 - cShow[i];
         }
         for(i = 0; i < turnPlaced; i++){ //horizontal
@@ -179,11 +179,11 @@ if(keyboard_check_pressed(vk_space)){
             cShow[i] = 4 - rShow[i];
             rShow[i] = 4 - cStore[i];
         }
-        for(i = 0; i < turnPlaced; i++){ //clockwise
+        for(i = 0; i < turnPlaced; i++){ //clockwise (move clockwise)
             cStore[i] = cShow[i];
             cShow[i] = 4 - rShow[i];
             rShow[i] = cStore[i];
-        }
+        }*/
         for(i = 0; i < turnPlaced; i++){ //anti-clockwise
             cStore[i] = cShow[i];
             cShow[i] = rShow[i];
