@@ -7,18 +7,19 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_symbols</sprite>
-    <sprite>sprites\spr_resetButton</sprite>
+    <sprite>sprites\spr_reset</sprite>
     <sprite>sprites\spr_check</sprite>
+    <sprite>sprites\spr_end</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\tile_gridSquare</background>
   </backgrounds>
   <paths name="paths"/>
   <objects name="objects">
-    <object>objects\obj_resetButton</object>
+    <object>objects\obj_reset</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\ROOM</room>
+    <room>rooms\GAME</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
