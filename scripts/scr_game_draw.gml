@@ -13,8 +13,8 @@ if(side & 1){
 } else{
     if(subimg == 0){
         draw_sprite(spr_buttons,0,128*(turn & 1),256);
-        draw_sprite(spr_timer,3-time1 + 4*(timer1 & 1),32,0);
-        draw_sprite(spr_timer,3-time2 + 4*(timer2 & 1),96,0);
+        draw_sprite(spr_timer,3-time1 + 4*(timer1 & 1),0,0);
+        draw_sprite(spr_timer,3-time2 + 4*(timer2 & 1),128,0);
     } else{
         draw_sprite(spr_buttons,5,64,256);
     }
@@ -44,7 +44,7 @@ for(c = 0;c < ds_grid_width(grid);c++){
                 }
             }
         }
-        if(gridCheck[# c,r] == 1){
+        if(gridCheck[# c,r] == 1 && subimg < image_number){
             draw_sprite(sprite_index,subimg,c*32,r*32+64);
         }
     }
