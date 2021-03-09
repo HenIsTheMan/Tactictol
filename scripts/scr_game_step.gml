@@ -76,15 +76,18 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
     }
 }
 
-if(keyboard_check_pressed(vk_space) && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),128*(turn & 1),256*(~turn & 1),128*(turn & 1)+32,256*(~turn & 1)+32)){
-    block = 0;
-    placed = 0;
-    subimg = 0;
-    ds_grid_clear(gridCheck,0);
-    turn++;
-    if(ds_grid_get_mean(grid,0,0,4,4) != -5){
-        time1 = 3;
-        time2 = 3;
-        alarm[0] = 1000000/delta_time;
+if(keyboard_check_pressed(vk_space)){
+    if((side & 1 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),128*(turn & 1),256*(~turn & 1),128*(turn & 1)+32,256*(~turn & 1)+32)) || (~side & 1 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),128*(turn & 1),256,128*(turn & 1)+32,256+32))){
+        audio_play_sound(snd_end,0,0);
+        block = 0;
+        placed = 0;
+        subimg = 0;
+        ds_grid_clear(gridCheck,0);
+        turn++;
+        if(ds_grid_get_mean(grid,0,0,4,4) != -5){
+            time1 = 3;
+            time2 = 3;
+            alarm[0] = 1000000/delta_time;
+        }
     }
 }

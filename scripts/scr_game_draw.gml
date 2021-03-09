@@ -1,8 +1,15 @@
-draw_sprite(spr_buttons,2,0,0);
-draw_sprite(spr_buttons,2,128,256);
-draw_sprite(spr_buttons,turn % 2,128*(turn & 1),256*(~turn & 1));
-draw_sprite_ext(spr_countdown,3-time2,96,32,1,1,180,-1,1);
-draw_sprite(spr_countdown,3-time1,64,256);
+if(side & 1){
+    draw_sprite(spr_buttons,2,0,0);
+    draw_sprite(spr_buttons,2,128,256);
+    draw_sprite(spr_buttons,turn % 2,128*(turn & 1),256*(~turn & 1));
+    draw_sprite(spr_timer,3-time1 + 4*(timer1 & 1),64,256);
+    draw_sprite_ext(spr_timer,3-time2 + 4*(timer2 & 1),96,32,1,1,180,-1,1);
+} else{
+    draw_sprite(spr_buttons,2,64,256);
+    draw_sprite(spr_buttons,0,128*(turn & 1),256);
+    draw_sprite(spr_timer,3-time1 + 4*(timer1 & 1),32,0);
+    draw_sprite(spr_timer,3-time2 + 4*(timer2 & 1),96,0);
+}
 
 for(c = 0;c < ds_grid_width(grid);c++){
     for(r = 0;r < ds_grid_height(grid);r++){
