@@ -1,11 +1,6 @@
 x = device_mouse_x(0) div 32 * 32;
 y = device_mouse_y(0) div 32 * 32;
 
-if(tile_exists(gridSquare)){
-    tile_delete(gridSquare);
-}
-tile_layer_show(layerDepth);
-
 if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),0,64,160,64+160)){
     if(grid[# x/32,y/32 - 2] == -5 && (placed == 0 || block)){
         block = 0;
@@ -95,4 +90,11 @@ if(keyboard_check_pressed(vk_space)){
             alarm[0] = 1000000/delta_time;
         }
     }
+}
+
+if(keyboard_check_pressed(ord("T"))){
+    timer1++;
+}
+if(keyboard_check_pressed(ord("Y"))){
+    timer2++;
 }

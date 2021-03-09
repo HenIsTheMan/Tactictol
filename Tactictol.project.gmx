@@ -10,6 +10,7 @@
     <sound>sound\snd_beep</sound>
     <sound>sound\snd_lose</sound>
     <sound>sound\snd_end</sound>
+    <sound>sound\snd_restart</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_symbols</sprite>
