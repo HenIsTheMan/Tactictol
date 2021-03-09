@@ -30,39 +30,58 @@ gridCheck = ds_grid_create(5,5); //??
 ds_grid_clear(grid,-5);
 ds_grid_clear(gridCheck,0);
 turn = choose(0,1);
-side = choose(0,1);
+side = 0;
 block = 0;
 timeLimit = 3;
 time1 = 3;
 time2 = 3;
 placed = 0;
 turnPlaced = 0;
+
 subimg = 0;
-subimg1 = irandom_range(2*(side &amp; 1),sprite_get_number(spr_symbols) - 1);
-subimg2 = subimg1;
-while(subimg2 == subimg1){
-    subimg2 = irandom_range(2*(side &amp; 1),sprite_get_number(spr_symbols) - 1);
+subimg1 = irandom_range(0,sprite_get_number(spr_symbols) - 1);
+do{
+    subimg2 = irandom_range(0,sprite_get_number(spr_symbols) - 1);
+} until(subimg2 != subimg1);
+
+colour[0] = c_white;
+colour[1] = c_red;
+colour[2] = c_orange;
+colour[3] = c_yellow;
+colour[4] = c_lime;
+colour[5] = c_blue;
+colour[6] = c_fuchsia;
+for(i = 1000000; i &lt; 1000007; i++){
+    tile_layer_hide(i);
 }
-colour1 = choose(c_red, c_orange, c_yellow, c_lime, c_blue, c_fuchsia);
-colour2 = choose(c_red, c_orange, c_yellow, c_lime, c_blue, c_fuchsia);
+layerDepth = irandom_range(1000000,1000006);
+tile_layer_show(layerDepth);
+do{
+    index1 = irandom_range(1000000,1000006);
+} until(index1 != layerDepth);
+do{
+    index2 = irandom_range(1000000,1000006);
+} until(index2 != layerDepth &amp;&amp; index2 != index1);
+colour1 = colour[index1 - 1000000];
+colour2 = colour[index2 - 1000000];
+
 pause = 0;
 timer1 = 0;
 timer2 = 0;
 sidePressed = 0;
+sameSymbol = 0;
+sameColour = 0;
 blind = 0;
 for(i = 0; i &lt; 25; i++){
     cShow[i] = 10;
     rShow[i] = 10;
 }
-layerDepth = irandom_range(1000000,1000006);
-for(i = 1000000; i &lt; 1000007; i++){
-    if(i != layerDepth){
-        tile_layer_hide(i);
-    }
-}
 
-virtual_key_add(64,128,32,32,ord("N"));
 virtual_key_add(64,256,32,32,ord("P"));
+virtual_key_add(0,128,32,32,ord("N"));
+virtual_key_add(32,128,32,32,ord("X"));
+virtual_key_add(64,128,32,32,ord("S"));
+virtual_key_add(96,128,32,32,ord("C"));
 virtual_key_add(128,128,32,32,ord("B"));
 scr_vKeysAdd();
 </string>

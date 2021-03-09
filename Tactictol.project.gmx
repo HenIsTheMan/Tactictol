@@ -25,6 +25,8 @@
   <scripts name="scripts">
     <script>scripts\scr_vKeysDelete.gml</script>
     <script>scripts\scr_vKeysAdd.gml</script>
+    <script>scripts\scr_symbols.gml</script>
+    <script>scripts\scr_colours.gml</script>
     <script>scripts\scr_game_step.gml</script>
     <script>scripts\scr_pause_step.gml</script>
     <script>scripts\scr_game_draw.gml</script>

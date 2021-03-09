@@ -31,5 +31,10 @@
     <frame index="8">images\spr_buttons_8.png</frame>
     <frame index="9">images\spr_buttons_9.png</frame>
     <frame index="10">images\spr_buttons_10.png</frame>
+    <frame index="11">images\spr_buttons_11.png</frame>
+    <frame index="12">images\spr_buttons_12.png</frame>
+    <frame index="13">images\spr_buttons_13.png</frame>
+    <frame index="14">images\spr_buttons_14.png</frame>
+    <frame index="15">images\spr_buttons_15.png</frame>
   </frames>
 </sprite>
