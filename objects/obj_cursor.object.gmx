@@ -106,7 +106,7 @@ if(point_in_rectangle(mouse_x,mouse_y,0,64,160,64+160)){
             } else{
                 grid[# xx,yy] = 0;
             }
-            for(m = 0;m &lt; 3;m++){
+            /*for(m = 0;m &lt; 3;m++){
                 for(n = 0;n &lt; 3;n++){
                     sum1 = ds_grid_get(grid,m,n) + ds_grid_get(grid,m+1,n+1) + ds_grid_get(grid,m+2,n+2); //sum1
                     sum2 = ds_grid_get(grid,m+2,n) + ds_grid_get(grid,m+1,n+1) + ds_grid_get(grid,m,n+2); //sum2
@@ -114,10 +114,19 @@ if(point_in_rectangle(mouse_x,mouse_y,0,64,160,64+160)){
                         block = 1;
                     }
                 }
-            }
-            for(i = 0;i &lt; 5;i++){
+            }*/
+            for(m = 0;m &lt; 3;m++){
                 for(n = 0;n &lt; 3;n++){
-                    if((collision_rectangle(i*32,n*32+64,i*32+32,(n+3)*32+64,self,0,0) &amp;&amp; ds_grid_get_sum(grid,i,n,i,n+2) == (~turn &amp; 1) + 1) || (collision_rectangle(n*32,i*32+64,(n+3)*32,i*32+64+32,self,0,0) &amp;&amp; ds_grid_get_sum(grid,n,i,n+2,i) == (~turn &amp; 1) + 1)){
+                    sum1 = ds_grid_get(grid,m,n) + ds_grid_get(grid,m+1,n+1) + ds_grid_get(grid,m+2,n+2); //sum1
+                    sum2 = ds_grid_get(grid,m+2,n) + ds_grid_get(grid,m+1,n+1) + ds_grid_get(grid,m,n+2); //sum2
+                    if((sum1 == (~turn &amp; 1) + 1 &amp;&amp; (point_in_rectangle(mouse_x,mouse_y,m*32,n*32+64,m*32+32,n*32+64+32) || point_in_rectangle(mouse_x,mouse_y,(m+1)*32,(n+1)*32+64,(m+1)*32+32,(n+1)*32+64+32) || point_in_rectangle(mouse_x,mouse_y,(m+2)*32,(n+2)*32+64,(m+2)*32+32,(n+2)*32+64+32))) || (sum2 == (~turn &amp; 1) + 1 &amp;&amp; (point_in_rectangle(mouse_x,mouse_y,(m+2)*32,n*32+64,(m+2)*32+32,n*32+64+32) || point_in_rectangle(mouse_x,mouse_y,(m+1)*32,(n+1)*32+64,(m+1)*32+32,(n+1)*32+64+32) || point_in_rectangle(mouse_x,mouse_y,m*32,(n+2)*32+64,m*32+32,(n+2)*32+64+32)))){
+                        block = 1;
+                    }
+                }
+            }
+            for(m = 0;m &lt; 5;m++){
+                for(n = 0;n &lt; 3;n++){
+                    if((point_in_rectangle(mouse_x,mouse_y,m*32,n*32+64,m*32+32,(n+3)*32+64) &amp;&amp; ds_grid_get_sum(grid,m,n,m,n+2) == (~turn &amp; 1) + 1) || (point_in_rectangle(mouse_x,mouse_y,n*32,m*32+64,(n+3)*32,m*32+64+32) &amp;&amp; ds_grid_get_sum(grid,n,m,n+2,m) == (~turn &amp; 1) + 1)){
                         block = 1;
                     }
                 }
@@ -142,16 +151,16 @@ if(point_in_rectangle(mouse_x,mouse_y,0,64,160,64+160)){
                     sum3 = ds_grid_get(grid,m,n) + ds_grid_get(grid,m+1,n+1) + ds_grid_get(grid,m+2,n+2);
                     sum4 = ds_grid_get(grid,m+2,n) + ds_grid_get(grid,m+1,n+1) + ds_grid_get(grid,m,n+2);  
                     if(sum1 == 3 || sum2 == 3){
-                        if((turn &amp; 1 &amp;&amp; (sum3 == 3 || sum4 == 3)) || (~turn &amp; 1 &amp;&amp; (sum3 == 0 || sum4 == 0))){
+                        if(sum3 == 3*(turn % 2) || sum4 == 3*(turn % 2)){
                             subimg = 1;
                         }
                     }
                 }
             }
-            for(i = 0;i &lt; 5;i++){
+            for(m = 0;m &lt; 5;m++){
                 for(n = 0;n &lt; 3;n++){
-                    if(ds_grid_get_sum(gridCheck,i,n,i,n+2) == 3 || ds_grid_get_sum(gridCheck,n,i,n+2,i) == 3){
-                        if((turn &amp; 1 &amp;&amp; (ds_grid_get_sum(grid,i,n,i,n+2) == 3 || ds_grid_get_sum(grid,n,i,n+2,i) == 3)) || (~turn &amp; 1 &amp;&amp; (ds_grid_get_sum(grid,i,n,i,n+2) == 0 || ds_grid_get_sum(grid,n,i,n+2,i) == 0))){
+                    if(ds_grid_get_sum(gridCheck,m,n,m,n+2) == 3 || ds_grid_get_sum(gridCheck,n,m,n+2,m) == 3){
+                        if(ds_grid_get_sum(grid,m,n,m,n+2) == 3*(turn % 2) || ds_grid_get_sum(grid,n,m,n+2,m) == 3*(turn % 2)){
                             subimg = 1;
                         }
                     }
@@ -213,6 +222,7 @@ draw_sprite(spr_reset,1,0,0);
 draw_healthbar(32,256,128,288,time1*20,c_gray,c_blue,c_blue,0,1,1);
 draw_healthbar(32,0,128,32,time2*20,c_gray,c_blue,c_blue,1,1,1);
 draw_text(32,0,block);
+draw_text(64,0,placed);
 
 for(c = 0;c &lt; ds_grid_width(grid);c++){
     for(r = 0;r &lt; ds_grid_height(grid);r++){
