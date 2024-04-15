@@ -15,6 +15,7 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
         rShow[placed] = y/32 - 2;
         placed++;
         turnPlaced = placed;
+        ds_grid_clear(gridCheck,0);
         //collision_line(m*32,n*32+64,(m+3)*32,(n+3)*32+64,self,0,0), collision_line((m+3)*32,n*32+64,m*32,(n+3)*32+64,self,0,0)
         for(m = 0;m < 3;m++){
             for(n = 0;n < 3;n++){
@@ -42,14 +43,7 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
             lose++;
         }
     } else if(grid[# x/32,y/32 - 2] != -5 && gridCheck[# x/32,y/32 - 2] == 0){
-        gridCheck[# x/32,y/32 - 2] = 1;
-        if(ds_grid_get_sum(gridCheck,0,0,4,4) == 3){
-            if(turn & 1){
-                time2 = 0;
-            } else{
-                time1 = 0;
-            }
-        }
+        gridCheck[# x/32,y/32 - 2] = !gridCheck[# x/32,y/32 - 2];
         for(m = 0;m < 3;m++){
             for(n = 0;n < 3;n++){
                 sum1 = ds_grid_get(grid,m,n) + ds_grid_get(grid,m+1,n+1) + ds_grid_get(grid,m+2,n+2);
@@ -57,7 +51,7 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
                 sum3 = ds_grid_get(gridCheck,m,n) + ds_grid_get(gridCheck,m+1,n+1) + ds_grid_get(gridCheck,m+2,n+2);
                 sum4 = ds_grid_get(gridCheck,m+2,n) + ds_grid_get(gridCheck,m+1,n+1) + ds_grid_get(gridCheck,m,n+2);
                 if(lose == 0 && (sum1 == 3*(turn % 2) || sum2 == 3*(turn % 2)) && (sum3 == 3 || sum4 == 3)){
-                    if(placed > 1){
+                    if(block){
                         audio_play_sound(snd_blockWin,0,0);
                     } else{
                         audio_play_sound(snd_normalWin,0,0);
@@ -70,7 +64,7 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
             for(n = 0;n < 3;n++){
                 if(lose == 0 && (ds_grid_get_sum(gridCheck,m,n,m,n+2) == 3 || ds_grid_get_sum(gridCheck,n,m,n+2,m) == 3)){
                     if(ds_grid_get_sum(grid,m,n,m,n+2) == 3*(turn % 2) || ds_grid_get_sum(grid,n,m,n+2,m) == 3*(turn % 2)){
-                        if(placed > 1){
+                        if(block){
                             audio_play_sound(snd_blockWin,0,0);
                         } else{
                             audio_play_sound(snd_normalWin,0,0);
@@ -88,6 +82,7 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
 if(keyboard_check_pressed(ord("U")) && placed > 0 && ~blind & 1 && time1 != 0 && time2 != 0 && ((~side & 1 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),32 + 64 * (turn & 1),256,32 + 64 * (turn & 1) + 32,288)) || (side & 1 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),128*(~turn & 1),256*(~turn & 1),128*(~turn & 1)+32,256*(~turn & 1)+32)))){
     placed--;
     turnPlaced = placed;
+    ds_grid_clear(gridCheck,0);
     grid[# cShow[placed],rShow[placed]] = -5;
     if(lose > 0 && point_distance(cc[lose - 1],rr[lose - 1],cShow[placed],rShow[placed]) == 0){
         lose--;
@@ -131,13 +126,13 @@ if(keyboard_check_pressed(vk_space)){
                 alarm[0] = 1000000/delta_time;
             }
         }
-        for(m = 0;m < 10;m++){
+        /*for(m = 0;m < 10;m++){
             for(n = 0;n < 10;n++){
                 if(m < 5 && n < 5){
                     value1[m,n] = grid[# m,n];
                     value2[m,n] = gridCheck[# m,n];
                 }
-                /*if(m >= 5 && n >= 5){ //vert
+                if(m >= 5 && n >= 5){ //vert
                     grid[# m - 5,n - 5] = value1[4 - (m - 5),n - 5];
                     gridCheck[# m - 5,n - 5] = value2[4 - (m - 5),n - 5];
                 }
@@ -156,14 +151,14 @@ if(keyboard_check_pressed(vk_space)){
                 if(m >= 5 && n >= 5){ //clockwise (assign value anti-clockwise to it)
                     grid[# m - 5,n - 5] = value1[n - 5,4 - (m - 5)];
                     gridCheck[# m - 5,n - 5] = value2[n - 5,4 - (m - 5)];
-                }*/
+                }
                 if(m >= 5 && n >= 5){ //anti-clockwise (...)
                     grid[# m - 5,n - 5] = value1[4 - (n - 5),m - 5];
                     gridCheck[# m - 5,n - 5] = value2[4 - (n - 5),m - 5];
                 }
             }
         }
-        /*for(i = 0; i < turnPlaced; i++){ //vert
+        for(i = 0; i < turnPlaced; i++){ //vert
             cShow[i] = 4 - cShow[i];
         }
         for(i = 0; i < turnPlaced; i++){ //horizontal
@@ -183,12 +178,12 @@ if(keyboard_check_pressed(vk_space)){
             cStore[i] = cShow[i];
             cShow[i] = 4 - rShow[i];
             rShow[i] = cStore[i];
-        }*/
+        }
         for(i = 0; i < turnPlaced; i++){ //anti-clockwise
             cStore[i] = cShow[i];
             cShow[i] = rShow[i];
             rShow[i] = 4 - cStore[i];
-        }
+        }*/
     }
 }
 

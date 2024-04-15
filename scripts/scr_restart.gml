@@ -17,4 +17,6 @@ for(i = 0; i < 25; i++){
     rr[i] = 10;
 }
 pause = 0;
-tile_layer_show(layerDepth);
+if(blind < 2){
+    tile_layer_show(layerDepth);
+}

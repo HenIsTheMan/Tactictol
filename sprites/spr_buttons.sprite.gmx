@@ -41,5 +41,11 @@
     <frame index="18">images\spr_buttons_18.png</frame>
     <frame index="19">images\spr_buttons_19.png</frame>
     <frame index="20">images\spr_buttons_20.png</frame>
+    <frame index="21">images\spr_buttons_21.png</frame>
+    <frame index="22">images\spr_buttons_22.png</frame>
+    <frame index="23">images\spr_buttons_23.png</frame>
+    <frame index="24">images\spr_buttons_24.png</frame>
+    <frame index="25">images\spr_buttons_25.png</frame>
+    <frame index="26">images\spr_buttons_26.png</frame>
   </frames>
 </sprite>

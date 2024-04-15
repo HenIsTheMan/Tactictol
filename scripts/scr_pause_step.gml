@@ -24,8 +24,6 @@ if(keyboard_check_pressed(ord("B"))){
 if(keyboard_check_pressed(vk_shift)){
     if(~side & 1 || (side & 1 && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),128*sidePressed,256*!sidePressed,128*sidePressed+32,256*!sidePressed+32))){
         audio_play_sound(snd_restart,0,0);
-        timeLimit1 = 3;
-        timeLimit2 = 3;
         scr_restart();
     }
 }

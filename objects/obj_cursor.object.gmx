@@ -151,8 +151,6 @@ alarm[0] = 1000000/delta_time;
         }
     } else{
         audio_play_sound(snd_restart,0,0);
-        timeLimit1 = 3;
-        timeLimit2 = 3;
         scr_restart();
     }
     sidePressed = point_in_rectangle(device_mouse_x(0),device_mouse_y(0),64,0,64+32,32);
@@ -186,7 +184,9 @@ if(subimg == 0){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(pause){
+            <string>draw_set_halign(fa_center);
+draw_set_valign(fa_middle);
+switch(pause){
     case 0: scr_game_draw(); break;
     case 1: scr_pause_draw(); break;
 }
