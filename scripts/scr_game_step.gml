@@ -10,12 +10,11 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
             }
         }
         block = 0;
+        grid[# x/32,y/32 - 2] = turn & 1;
+        cShow[placed] = x/32;
+        rShow[placed] = y/32 - 2;
         placed++;
-        if(turn & 1){
-            grid[# x/32,y/32 - 2] = 1;
-        } else{
-            grid[# x/32,y/32 - 2] = 0;
-        }
+        turnPlaced = placed;
         //collision_line(m*32,n*32+64,(m+3)*32,(n+3)*32+64,self,0,0), collision_line((m+3)*32,n*32+64,m*32,(n+3)*32+64,self,0,0)
         for(m = 0;m < 3;m++){
             for(n = 0;n < 3;n++){

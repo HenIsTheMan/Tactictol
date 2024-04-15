@@ -40,8 +40,10 @@ subimg2 = subimg1;
 while(subimg2 == subimg1){
     subimg2 = irandom(sprite_get_number(spr_symbols) - 1);
 }
+colour1 = choose(c_red, c_orange, c_yellow, c_lime, c_blue, c_fuchsia);
+colour2 = choose(c_red, c_orange, c_yellow, c_lime, c_blue, c_fuchsia);
 pause = 0;
-side = 0;
+side = choose(0,1);
 timer1 = 0;
 timer2 = 0;
 sidePressed = 0;
@@ -60,15 +62,8 @@ for(i = 1000000; i &lt; 1000007; i++){
 
 virtual_key_add(64,128,32,32,ord("N"));
 virtual_key_add(64,256,32,32,ord("P"));
-key[0] = virtual_key_add(64,0,32,32,vk_shift);
-key[1] = virtual_key_add(0,256,32,32,vk_space);
-key[2] = virtual_key_add(128,256,32,32,vk_space);
-key[3] = virtual_key_add(0,256,32,32,ord("C"));
-key[4] = virtual_key_add(128,256,32,32,ord("V"));
-key[5] = virtual_key_add(0,0,32,32,ord("T"));
-key[6] = virtual_key_add(128,0,32,32,ord("Y"));
-key[7] = virtual_key_add(0,128,32,32,ord("B"));
-key[8] = virtual_key_add(128,128,32,32,ord("O"));
+virtual_key_add(128,128,32,32,ord("B"));
+scr_vKeysAdd();
 </string>
           </argument>
         </arguments>
@@ -131,6 +126,7 @@ alarm[0] = 1000000/delta_time;
         audio_play_sound(snd_restart,0,0);
         scr_restart();
     }
+    sidePressed = point_in_rectangle(device_mouse_x(0),device_mouse_y(0),64,0,64+32,32);
 }
 
 if(subimg == 0){
