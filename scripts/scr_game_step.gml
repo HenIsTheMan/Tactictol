@@ -9,6 +9,7 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
                 rShow[i] = 10;
             }
         }
+        blockAfter = placed == 1 && !block;
         block = 0;
         grid[# x/32,y/32 - 2] = turn & 1;
         cShow[placed] = x/32;
@@ -37,12 +38,20 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
         time2 = timeLimit2;
         alarm[0] = 1000000/delta_time;
         audio_play_sound(snd_beep,0,0);
-        if(placed > 1 && !block){
+        if(blockAfter || (placed > 1 && !block)){
             cc[lose] = cShow[placed - 1];
-            rr[lose] = rShow[placed - 1]; 
+            rr[lose] = rShow[placed - 1];
+            blockAfter = 0;
             lose++;
         }
     } else if(grid[# x/32,y/32 - 2] != -5 && gridCheck[# x/32,y/32 - 2] == 0){
+        if(ds_grid_get_sum(gridCheck,0,0,4,4) == 3){
+            if(turn & 1){
+                time2 = 0;
+            } else{
+                time1 = 0;
+            }
+        }
         gridCheck[# x/32,y/32 - 2] = !gridCheck[# x/32,y/32 - 2];
         for(m = 0;m < 3;m++){
             for(n = 0;n < 3;n++){

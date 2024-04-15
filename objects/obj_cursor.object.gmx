@@ -32,6 +32,7 @@ ds_grid_clear(gridCheck,0);
 turn = choose(0,1);
 side = 0;
 block = 0;
+blockAfter = 0;
 timeLimit1 = 3;
 timeLimit2 = 3;
 time1 = 3;
