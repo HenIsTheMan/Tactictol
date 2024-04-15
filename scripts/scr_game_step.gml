@@ -3,6 +3,12 @@ y = device_mouse_y(0) div 32 * 32;
 
 if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && point_in_rectangle(device_mouse_x(0),device_mouse_y(0),0,64,160,64+160)){
     if(grid[# x/32,y/32 - 2] == -5 && (placed == 0 || block)){
+        if(placed == 0){
+            for(i = 0; i < 25; i++){
+                cShow[i] = 10;
+                rShow[i] = 10;
+            }
+        }
         block = 0;
         placed++;
         if(turn & 1){
@@ -27,15 +33,17 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
                 }
             }
         }
-        if(placed > 1 && !block){
-            audio_play_sound(snd_lose,0,0);
-            room_restart();
-        } else{
-            audio_play_sound(snd_beep,0,0);
-        }
         time1 = 3;
         time2 = 3;
         alarm[0] = 1000000/delta_time;
+        if(placed > 1 && !block){
+            audio_play_sound(snd_lose,0,0);
+            ds_grid_clear(gridCheck,0);
+            gridCheck[# x/32,y/32 - 2] = 1;
+            subimg = 2;
+        } else{
+            audio_play_sound(snd_beep,0,0);
+        }
     } else if(subimg == 0 && grid[# x/32,y/32 - 2] != -5 && gridCheck[# x/32,y/32 - 2] == 0){
         if(ds_grid_get_sum(gridCheck,0,0,4,4) == 3){
             ds_grid_clear(gridCheck,0);
@@ -54,6 +62,7 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
                         audio_play_sound(snd_normalWin,0,0);
                     }
                     subimg = 1;
+                    blind = 0;
                 }
             }
         }
@@ -67,6 +76,7 @@ if(time1 != 0 && time2 != 0 && device_mouse_check_button_pressed(0,mb_left) && p
                             audio_play_sound(snd_normalWin,0,0);
                         }
                         subimg = 1;
+                        blind = 0;
                     }
                 }
             }
@@ -84,7 +94,7 @@ if(keyboard_check_pressed(vk_space)){
         subimg = 0;
         ds_grid_clear(gridCheck,0);
         turn++;
-        if(ds_grid_get_mean(grid,0,0,4,4) != -5){
+        if(ds_grid_get_sum(grid,0,0,4,4) != -125){
             time1 = 3;
             time2 = 3;
             alarm[0] = 1000000/delta_time;
